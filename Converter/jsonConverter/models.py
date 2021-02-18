@@ -8,3 +8,4 @@ from django.dispatch import receiver
 
 class Files(models.Model):
     json_file = models.FileField(upload_to='json/')
+    datestamp = models.DateTimeField(auto_now_add=True)
