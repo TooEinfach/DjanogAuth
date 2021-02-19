@@ -18,13 +18,13 @@ def merge():
     lineByLine = []
     fileList = []
 
-    for f in os.listdir('/home/nick/Documents/projects/jsonFiles'):
+    for f in os.listdir('/opt/posts/files/media/json/'):
         fileList.append(f)
 
     print(fileList)
 
     for f2 in fileList:
-        with open('/home/nick/Documents/projects/jsonFiles/' + f2) as newFile:
+        with open('/opt/posts/files/media/json/' + f2) as newFile:
             db = json.load(newFile)
             lineByLine.append(db)
 
@@ -37,11 +37,21 @@ def merge():
 
     # lineByLine_dumped = json.dumps(lineByLine)
     # print(lineByLine_dumped)
-    with open('testing.json','w') as lineByLine_dumped:
+    with open('/opt/posts/files/media/json/daily.json','w') as lineByLine_dumped:
         json.dump(lineByLine, lineByLine_dumped)
 
 @shared_task
 def move():
-    target = '/opt/S/USERS/FIN/Cashiers/Upload/testing.json'
-    original = '/home/nick/Documents/projects/DjanogAuth/Converter/testing.json'
+    target = '/opt/S/USERS/FIN/Cashiers/Upload/daily.json'
+    original = '/opt/posts/files/media/json/daily.json'
     shutil.move(original,target)
+
+@shared_task
+def cleanup():
+    target = '/opt/archive/files/'
+    original = '/opt/posts/files/media/json/'
+
+    files = os.listdir(original)
+
+    for f in files:
+        shutil.move(original + f, target)
