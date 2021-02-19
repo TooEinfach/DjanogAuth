@@ -111,7 +111,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'America/Mountain'
+TIME_ZONE = 'America/Denver'
 
 USE_I18N = True
 
@@ -131,7 +131,8 @@ REST_FRAMEWORK = {
     ],
 }
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join('/opt/posts/files', 'media')
 MEDIA_URL = '/media/'
 
 
