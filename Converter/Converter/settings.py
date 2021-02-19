@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+from celery.schedules import crontab
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -40,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'jsonConverter.apps.JsonconverterConfig',
     'rest_framework',
-    'rest_framework.authtoken', 
+    'rest_framework.authtoken',
+    'django_celery_beat',
 ]
 
 MIDDLEWARE = [
@@ -109,7 +111,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Denver'
 
 USE_I18N = True
 
@@ -131,3 +133,12 @@ REST_FRAMEWORK = {
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+
+CELERY_BEAT_SCHEDULE = {
+    # Executes Everyday at at 10:30
+    'merge-todays-files': {
+        'task': 'jsonConverter.tasks.merge',
+        'schedule': crontab(hour=10, minute=45)
+    },
+}

@@ -42,6 +42,6 @@ def merge():
 
 @shared_task
 def move():
-    target = '/mnt/S/USERS/FIN/Cashiers/Upload/testing.json'
+    target = '/opt/S/USERS/FIN/Cashiers/Upload/testing.json'
     original = '/home/nick/Documents/projects/DjanogAuth/Converter/testing.json'
     shutil.move(original,target)
