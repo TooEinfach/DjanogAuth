@@ -131,7 +131,8 @@ REST_FRAMEWORK = {
     ],
 }
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join('/opt/posts/files', 'media')
 MEDIA_URL = '/media/'
 
 
