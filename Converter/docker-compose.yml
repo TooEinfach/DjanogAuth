@@ -1,0 +1,28 @@
+version: '3.3'
+services: 
+  web:
+    build: .
+    command: python3 manage.py runserver 0.0.0.0:8000
+    ports: 
+        - "8000:8000"
+
+  rabbit:
+    hostname: rabbit
+    image: rabbitmq:latest
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    ports:
+      - "5672:5672"
+
+  celery-worker:
+    build:
+      context: ./app
+      container_name: celery-worker
+      command: celery -A  Converter  worker -B -l INFO
+
+  celery-beat:
+    build: 
+      context: ./app
+      container_name: celery-beat
+      command: celery -A Converter beat -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler
