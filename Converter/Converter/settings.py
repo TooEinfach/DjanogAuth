@@ -28,7 +28,7 @@ SECRET_KEY = bwl
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['10.100.8.133']
+ALLOWED_HOSTS = ['10.100.8.133','127.0.0.1']
 
 
 # Application definition
@@ -144,6 +144,6 @@ CELERY_BEAT_SCHEDULE = {
         'schedule': crontab(hour=10, minute=45)
     },
 }
-CSRF_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
 #SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
