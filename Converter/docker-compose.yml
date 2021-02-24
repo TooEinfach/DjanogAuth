@@ -2,7 +2,12 @@ version: '3.3'
 services: 
   web:
     build: .
+    container_name: converter_app
     command: python3 manage.py runserver 0.0.0.0:8000
+    volumes: 
+        - /opt/S/USERS/FIN/Cashiers/Upload:/opt/S/USERS/FIN/Cashiers/Upload
+        - /opt/archive/files:/opt/archive/files
+        - /opt/posts/files/media/json:/opt/posts/files/media/json
     ports: 
         - "8000:8000"
 
@@ -16,13 +21,29 @@ services:
       - "5672:5672"
 
   celery-worker:
-    build:
-      context: ./app
-      container_name: celery-worker
-      command: celery -A  Converter  worker -B -l INFO
+    build: .
+    container_name: celery-worker
+    command: celery -A  Converter  worker -B -l INFO
+    depends_on: 
+      - rabbit
+    environment: 
+      - CELERY_BROKER=amqp://guest:guest@rabbit:5672
+    volumes: 
+        - /opt/S/USERS/FIN/Cashiers/Upload:/opt/S/USERS/FIN/Cashiers/Upload
+        - /opt/archive/files:/opt/archive/files
+        - /opt/posts/files/media/json:/opt/posts/files/media/json
 
   celery-beat:
-    build: 
-      context: ./app
-      container_name: celery-beat
-      command: celery -A Converter beat -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler
+    build: .
+    container_name: celery-beat
+    command: celery -A Converter beat -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler
+    environment: 
+      - CELERY_BROKER=amqp://guest:guest@rabbit:5672
+
+# volumes: 
+#   webdata:
+#     driver: local
+#   arcivedata:
+#     driver: local
+#   mediadata:
+#     driver: local
