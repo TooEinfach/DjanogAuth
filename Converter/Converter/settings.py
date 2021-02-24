@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import os
 from celery.schedules import crontab
+from .blw import bwl
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -22,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'w6+osjhm=fx2mqflo_5q8qx%5-)e27_lq4%@i4$6rto4-ywa2w'
+SECRET_KEY = bwl
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

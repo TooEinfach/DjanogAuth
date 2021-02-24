@@ -40,10 +40,3 @@ services:
     environment: 
       - CELERY_BROKER=amqp://guest:guest@rabbit:5672
 
-# volumes: 
-#   webdata:
-#     driver: local
-#   arcivedata:
-#     driver: local
-#   mediadata:
-#     driver: local
