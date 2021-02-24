@@ -28,7 +28,7 @@ SECRET_KEY = bwl
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['10.100.8.133:8000']
 
 
 # Application definition
