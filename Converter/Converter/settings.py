@@ -144,3 +144,6 @@ CELERY_BEAT_SCHEDULE = {
         'schedule': crontab(hour=10, minute=45)
     },
 }
+CSRF_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
