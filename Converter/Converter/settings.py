@@ -28,7 +28,7 @@ SECRET_KEY = bwl
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['10.100.8.133','127.0.0.1']
+ALLOWED_HOSTS = ['blw.sandy.utah.gov','127.0.0.1']
 
 
 # Application definition
