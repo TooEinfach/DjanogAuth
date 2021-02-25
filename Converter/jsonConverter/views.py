@@ -2,6 +2,8 @@ from django.shortcuts import render
 
 from .models import Files
 import os
+import json
+import logging
 
 
 from rest_framework.views import APIView
@@ -24,7 +26,10 @@ class DemoView(APIView):
         success = {'message': 'Post was successful'}
         failure = {'message': 'Save failed'}
         if request.method == 'POST':
-            newdoc = Files(json_file=request.FILES.get('myfile'))
-            newdoc.save()                
+            print('Raw Data: "%s"' % request.body)
+            # received_json_date=json.loads(request.body)
+            # logging.info('Post is ' + str(received_json_date))
+            # newdoc = Files(json_file=request.FILES.get('myfile'))
+            # newdoc.save()                
             return Response(success)
             
